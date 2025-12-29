@@ -12,13 +12,9 @@ def create_person_list(people: list) -> list:
     instances = [Person(p["name"], p["age"]) for p in people]
     for data, inst in zip(people, instances):
         spouse_name = data.get("wife")
-        if spouse_name is not None:
-            spouse = Person.people.get(spouse_name)
-            if spouse is not None:
-                inst.wife = spouse
+        if spouse_name is not None and Person.people.get(spouse_name) is not None:
+            inst.wife = Person.people.get(spouse_name)
         spouse_name = data.get("husband")
-        if spouse_name is not None:
-            spouse = Person.people.get(spouse_name)
-            if spouse is not None:
-                inst.husband = spouse
+        if spouse_name is not None and Person.people.get(spouse_name) is not None:
+            inst.husband = Person.people.get(spouse_name)
     return instances
